@@ -1,0 +1,9 @@
+services:
+  osmo:
+    build: .
+    volumes:
+      - ./etc:/etc/osmocom
+      - ./db:/var/lib/osmocom
+    devices:
+      - /dev/bus/usb/002/003
+    entrypoint: /etc/osmocom/start.sh
