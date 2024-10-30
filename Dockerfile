@@ -1,20 +1,22 @@
 FROM debian
 
+# add Osmocom repository
 RUN apt update
 RUN apt install -y extrepo
 RUN extrepo enable osmocom-latest
 
+# install LimeSDR and Osmocom packages
 RUN apt update
-RUN apt install -y limesuite
 RUN apt install -y \
-  osmo-hlr \
-  osmo-msc \
-  osmo-mgw \
-  osmo-stp \
+  limesuite \
   osmo-bsc \
-  osmo-ggsn \
-  osmo-sgsn \
   osmo-bts-trx \
-  osmo-trx-lms \
+  osmo-cbc \
+  osmo-ggsn \
+  osmo-hlr \
+  osmo-mgw \
+  osmo-msc \
   osmo-pcu \
-  osmo-cbc
+  osmo-sgsn \
+  osmo-stp \
+  osmo-trx-lms

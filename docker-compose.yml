@@ -1,9 +1,35 @@
 services:
-  osmo:
+  ran-bts-trx:
     build: .
     volumes:
       - ./etc:/etc/osmocom
-      - ./db:/var/lib/osmocom
+    networks:
+      xxx:
+        ipv4_address: 10.1.0.10
+    entrypoint: osmo-bts-trx -c /etc/osmocom/osmo-bts-trx.cfg
+
+  ran-trx-lms:
+    build: .
+    volumes:
+      - ./etc:/etc/osmocom
     devices:
-      - /dev/bus/usb/002/003
-    entrypoint: /etc/osmocom/start.sh
+      - /dev/bus/usb/002/002
+    networks:
+      xxx:
+        ipv4_address: 10.1.0.11
+    entrypoint: osmo-trx-lms -C /etc/osmocom/osmo-trx-lms.cfg
+
+  ran-bsc:
+    build: .
+    volumes:
+      - ./etc:/etc/osmocom
+    networks:
+      xxx:
+        ipv4_address: 10.1.0.12
+    entrypoint: osmo-bsc -c /etc/osmocom/osmo-bsc.cfg
+
+networks:
+  xxx:
+    ipam:
+      config:
+        - subnet: 10.1.0.0/24
