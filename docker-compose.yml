@@ -1,4 +1,32 @@
 services:
+  stp:
+    build: .
+    volumes:
+      - ./etc:/etc/osmocom
+    networks:
+      xxx:
+        ipv4_address: 10.1.0.15
+    entrypoint: osmo-stp -c /etc/osmocom/osmo-stp.cfg
+
+  cn-msc:
+    build: .
+    volumes:
+      - ./etc:/etc/osmocom
+    networks:
+      xxx:
+        ipv4_address: 10.1.0.13
+    entrypoint: osmo-msc -c /etc/osmocom/osmo-msc.cfg
+
+  cn-hlr:
+    build: .
+    volumes:
+      - ./etc:/etc/osmocom
+      # TODO: hlr.db
+    networks:
+      xxx:
+        ipv4_address: 10.1.0.14
+    entrypoint: osmo-hlr -c /etc/osmocom/osmo-hlr.cfg -l /var/lib/osmocom/hlr.db
+
   ran-bts-trx:
     build: .
     volumes:
@@ -13,7 +41,7 @@ services:
     volumes:
       - ./etc:/etc/osmocom
     devices:
-      - /dev/bus/usb/002/002
+      - /dev/bus/usb/002/004
     networks:
       xxx:
         ipv4_address: 10.1.0.11
