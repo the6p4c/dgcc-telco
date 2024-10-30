@@ -21,7 +21,7 @@ services:
     build: .
     volumes:
       - ./etc:/etc/osmocom
-      # TODO: hlr.db
+      - cn-hlr:/var/lib/osmocom/
     networks:
       xxx:
         ipv4_address: 10.1.0.14
@@ -61,3 +61,6 @@ networks:
     ipam:
       config:
         - subnet: 10.1.0.0/24
+
+volumes:
+  cn-hlr:
