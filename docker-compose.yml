@@ -41,7 +41,7 @@ services:
     volumes:
       - ./etc:/etc/osmocom
     devices:
-      - /dev/bus/usb/002/004
+      - /dev/bus/usb/002/006
     networks:
       xxx:
         ipv4_address: 10.1.0.11
